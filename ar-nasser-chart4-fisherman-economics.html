@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>اقتصاديات الصياد اليومية: جهد كبير وعائد هزيل</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{--blue:#378ADD;--coral:#D85A30;--teal:#1D9E75;--amber:#BA7517;--gray:#888780;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Tajawal',sans-serif;background:#fff;color:#2c2c2a;direction:rtl;}
+  #root{padding:16px 20px 14px;}
+  .hdr{border-right:3px solid #BA7517;padding-right:11px;margin-bottom:10px;}
+  .tag{font-size:10px;font-weight:700;letter-spacing:.07em;color:var(--gray);margin-bottom:2px;text-transform:uppercase;}
+  .title{font-size:15px;font-weight:700;line-height:1.4;margin-bottom:2px;}
+  .subtitle{font-size:12px;color:#5f5e5a;}
+  .callout{background:#f1efe8;border-right:3px solid #BA7517;padding:8px 11px;font-size:12px;color:#5f5e5a;line-height:1.6;margin:9px 0;font-style:italic;}
+  .chart-wrap{position:relative;width:100%;height:190px;}
+  .source{font-size:10px;color:var(--gray);margin-top:10px;line-height:1.4;text-align:right;}
+  @media(prefers-color-scheme:dark){
+    body{background:#1a1a18;color:#d3d1c7;}
+    .callout{background:#2c2c2a;color:#b4b2a9;}
+    .subtitle,.source{color:#b4b2a9;}
+  }
+</style>
+</head>
+<body>
+<div id="root">
+  <div class="hdr">
+    <p class="tag">زاوية ثالثة · إنفوجرافيك ٤ من ٤</p>
+    <p class="title">اقتصاديات الصياد اليومية: جهد كبير وعائد هزيل</p>
+    <p class="subtitle">بحيرة ناصر — منطقة حدودية معزولة بلا خدمات</p>
+  </div>
+  <div class="callout">"العائد اليومي للصياد بالكاد يكفي احتياجاته الأساسية، وقد لا يتجاوز 200 إلى 250 جنيهاً، خاصة مع توقف الصيد لعدة أشهر من كل عام"</div>
+  
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
+    <div style="flex:1;min-width:110px;background:#f1efe8;border-radius:8px;padding:10px 12px;text-align:center">
+      <div style="font-size:13px;color:#5f5e5a;margin-bottom:4px">إنتاج المركب / يوم</div>
+      <div style="font-size:20px;font-weight:700;color:#BA7517">30–50 كجم</div>
+    </div>
+    <div style="flex:1;min-width:110px;background:#f1efe8;border-radius:8px;padding:10px 12px;text-align:center">
+      <div style="font-size:13px;color:#5f5e5a;margin-bottom:4px">سعر البيع / كجم</div>
+      <div style="font-size:20px;font-weight:700;color:#378ADD">30–55 ج</div>
+    </div>
+  </div>
+  <div style="margin-bottom:10px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px">
+      <span style="font-size:12px;color:#5f5e5a">صافي دخل الصياد / يوم (بعد التكاليف)</span>
+      <span id="v1" style="font-size:15px;font-weight:700;color:#1D9E75">0</span>
+    </div>
+    <div style="height:26px;background:#f1efe8;border-radius:4px;overflow:hidden">
+      <div id="f1" style="height:100%;border-radius:4px;width:0;background:#1D9E75;display:flex;align-items:center;padding-right:10px;font-size:12px;font-weight:700;color:#fff;transition:width 1.1s ease;direction:rtl"></div>
+    </div>
+  </div>
+  <div style="margin-bottom:12px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px">
+      <span style="font-size:12px;color:#5f5e5a">الاستقطاع المقترح (40%) من الدخل اليومي</span>
+      <span id="v2" style="font-size:15px;font-weight:700;color:#D85A30">0</span>
+    </div>
+    <div style="height:26px;background:#f1efe8;border-radius:4px;overflow:hidden">
+      <div id="f2" style="height:100%;border-radius:4px;width:0;background:#D85A30;display:flex;align-items:center;padding-right:10px;font-size:12px;font-weight:700;color:#fff;transition:width 1.1s ease;direction:rtl"></div>
+    </div>
+  </div>
+  <div style="background:#faece7;border-right:3px solid #D85A30;padding:8px 11px;font-size:11px;color:#993C1D;line-height:1.6">
+    ⚠ فترة وقف الصيد: من 15 مارس إلى 15 مايو كل عام (شهران بلا دخل)، بالإضافة إلى لا كهرباء ولا تغطية محمول ولا مستشفيات داخل البحيرة.
+  </div>
+  <script>
+  setTimeout(function(){
+    document.getElementById('f1').style.width='100%';
+    document.getElementById('f1').textContent='225 جنيه / يوم';
+    document.getElementById('f2').style.width='40%';
+    document.getElementById('f2').textContent='90 جنيه يُقتطع';
+    var s=null;
+    function cu(ts){if(!s)s=ts;var p=Math.min((ts-s)/900,1),e=1-Math.pow(1-p,3);document.getElementById('v1').textContent=Math.round(e*225)+' جنيه';document.getElementById('v2').textContent=Math.round(e*90)+' جنيه';if(p<1)requestAnimationFrame(cu);else{document.getElementById('v1').textContent='200–250 جنيه';document.getElementById('v2').textContent='~90 جنيه';}}
+    requestAnimationFrame(cu);
+  },200);
+  </script>
+  <p class="source">المصدر: أحمد سيلمان — كبير الصيادين / تصريحات لزاوية ثالثة</p>
+</div>
+<script>
+setTimeout(function(){
+  var h=document.getElementById('root').offsetHeight;
+  window.parent.postMessage({type:'chartResize',height:h},'*');
+},1400);
+</script>
+</body>
+</html>

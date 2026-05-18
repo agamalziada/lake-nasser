@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>إنتاج بحيرة ناصر السمكي: من الذروة التاريخية إلى الواقع الراهن</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{--blue:#378ADD;--coral:#D85A30;--teal:#1D9E75;--amber:#BA7517;--gray:#888780;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Tajawal',sans-serif;background:#fff;color:#2c2c2a;direction:rtl;}
+  #root{padding:16px 20px 14px;}
+  .hdr{border-right:3px solid #378ADD;padding-right:11px;margin-bottom:10px;}
+  .tag{font-size:10px;font-weight:700;letter-spacing:.07em;color:var(--gray);margin-bottom:2px;text-transform:uppercase;}
+  .title{font-size:15px;font-weight:700;line-height:1.4;margin-bottom:2px;}
+  .subtitle{font-size:12px;color:#5f5e5a;}
+  .callout{background:#f1efe8;border-right:3px solid #378ADD;padding:8px 11px;font-size:12px;color:#5f5e5a;line-height:1.6;margin:9px 0;font-style:italic;}
+  .chart-wrap{position:relative;width:100%;height:190px;}
+  .source{font-size:10px;color:var(--gray);margin-top:10px;line-height:1.4;text-align:right;}
+  @media(prefers-color-scheme:dark){
+    body{background:#1a1a18;color:#d3d1c7;}
+    .callout{background:#2c2c2a;color:#b4b2a9;}
+    .subtitle,.source{color:#b4b2a9;}
+  }
+</style>
+</head>
+<body>
+<div id="root">
+  <div class="hdr">
+    <p class="tag">زاوية ثالثة · إنفوجرافيك ٢ من ٤</p>
+    <p class="title">إنتاج بحيرة ناصر السمكي: من الذروة التاريخية إلى الواقع الراهن</p>
+    <p class="subtitle">ألف طن — 2014 حتى 2024 مقارنةً بالذروة التاريخية</p>
+  </div>
+  <div class="callout">"الإنتاج الحالي لا يزال أقل بكثير من مستويات الثمانينيات والتسعينيات، حين تجاوز 30 إلى 50 ألف طن سنوياً"</div>
+  
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
+    <div style="flex:1;min-width:90px;background:#faece7;border-radius:7px;padding:8px 10px">
+      <div style="font-size:17px;font-weight:700;color:#D85A30">30–50 ألف</div>
+      <div style="font-size:10px;color:#5f5e5a;margin-top:1px">طن — الذروة (80s-90s)</div>
+    </div>
+    <div style="flex:1;min-width:90px;background:#e1f5ee;border-radius:7px;padding:8px 10px">
+      <div style="font-size:17px;font-weight:700;color:#1D9E75">27 ألف</div>
+      <div style="font-size:10px;color:#5f5e5a;margin-top:1px">طن — 2024 (أحدث بيانات)</div>
+    </div>
+  </div>
+  <div class="chart-wrap" style="height:200px"><canvas id="c"></canvas></div>
+  <script>
+  var dk=matchMedia('(prefers-color-scheme:dark)').matches;
+  var tc=dk?'#b4b2a9':'#5f5e5a',gc=dk?'rgba(255,255,255,.08)':'rgba(0,0,0,.07)';
+  var blue=dk?'#85B7EB':'#378ADD',coral=dk?'#F0997B':'#D85A30',teal=dk?'#5DCAA5':'#1D9E75';
+  var data=[19.6,18.35,19.75,28,25,25,27];
+  var colors=data.map(function(v,i){return i===3?coral:i===6?teal:blue;});
+  new Chart(document.getElementById('c'),{type:'bar',data:{labels:['2014','2016','2017','2018','2019','2023','2024'],datasets:[{data:data,backgroundColor:colors,borderWidth:0,borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,animation:{duration:1000,easing:'easeOutQuart'},plugins:{legend:{display:false},tooltip:{backgroundColor:dk?'#2c2c2a':'#fff',borderColor:dk?'rgba(255,255,255,.1)':'rgba(0,0,0,.08)',borderWidth:1,titleColor:dk?'#d3d1c7':'#2c2c2a',bodyColor:tc,titleFont:{family:'Tajawal'},bodyFont:{family:'Tajawal'},padding:10,callbacks:{label:function(c){return c.raw+' ألف طن';},afterBody:function(ctx){if(ctx[0].dataIndex===3)return['⬆ أعلى إنتاج في العقد الأخير'];return[];}}}},scales:{x:{ticks:{color:tc,font:{size:11,family:'Tajawal'}},grid:{display:false},border:{color:gc}},y:{ticks:{color:tc,font:{size:11,family:'Tajawal'},callback:function(v){return v+'k';}},grid:{color:gc},border:{display:false}}}},plugins:[{id:'refLine',afterDraw:function(chart){var ctx2=chart.ctx,yScale=chart.scales.y,xScale=chart.scales.x;var y=yScale.getPixelForValue(30);ctx2.save();ctx2.setLineDash([5,4]);ctx2.strokeStyle=coral;ctx2.lineWidth=1.5;ctx2.beginPath();ctx2.moveTo(xScale.left,y);ctx2.lineTo(xScale.right,y);ctx2.stroke();ctx2.fillStyle=coral;ctx2.font='10px Tajawal';ctx2.textAlign='left';ctx2.fillText('حد الذروة التاريخية (30 ألف طن)',xScale.left+4,y-4);ctx2.restore();}}]});
+  </script>
+  <p class="source">المصدر: بيانات رسمية — يوم7، روزاليوسف، الجهاز المركزي للتعبئة</p>
+</div>
+<script>
+setTimeout(function(){
+  var h=document.getElementById('root').offsetHeight;
+  window.parent.postMessage({type:'chartResize',height:h},'*');
+},1400);
+</script>
+</body>
+</html>
