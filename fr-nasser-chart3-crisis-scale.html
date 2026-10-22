@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>L’ampleur de la crise : 2 800 licences suspendues, des milliers de familles menacées</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{--blue:#378ADD;--coral:#D85A30;--teal:#1D9E75;--amber:#BA7517;--gray:#888780;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Tajawal',sans-serif;background:#fff;color:#2c2c2a;direction:ltr;}
+  #root{padding:16px 20px 14px;}
+  .hdr{border-left:3px solid #D85A30;padding-left:11px;margin-bottom:10px;}
+  .tag{font-size:10px;font-weight:700;letter-spacing:.07em;color:var(--gray);margin-bottom:2px;text-transform:uppercase;}
+  .title{font-size:15px;font-weight:700;line-height:1.4;margin-bottom:2px;}
+  .subtitle{font-size:12px;color:#5f5e5a;}
+  .callout{background:#f1efe8;border-left:3px solid #D85A30;padding:8px 11px;font-size:12px;color:#5f5e5a;line-height:1.6;margin:9px 0;font-style:italic;}
+  .chart-wrap{position:relative;width:100%;height:190px;}
+  .source{font-size:10px;color:var(--gray);margin-top:10px;line-height:1.4;text-align:left;}
+  @media(prefers-color-scheme:dark){
+    body{background:#1a1a18;color:#d3d1c7;}
+    .callout{background:#2c2c2a;color:#b4b2a9;}
+    .subtitle,.source{color:#b4b2a9;}
+  }
+</style>
+</head>
+<body>
+<div id="root">
+  <div class="hdr">
+    <p class="tag">Zawia3 · Graphique 3 sur 4</p>
+    <p class="title">L’ampleur de la crise : 2 800 licences suspendues, des milliers de familles menacées</p>
+    <p class="subtitle">Conséquences de la suspension du renouvellement des licences au lac Nasser</p>
+  </div>
+  <div class="callout">« Chaque licence fait travailler environ cinq personnes, chacune soutenant sa famille, dans une région isolée et géographiquement rude. »</div>
+  
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
+    <div style="flex:1;min-width:130px;background:#faece7;border-radius:9px;padding:12px 14px;text-align:center">
+      <div id="c1" style="font-size:32px;font-weight:700;color:#D85A30;line-height:1">0</div>
+      <div style="font-size:12px;color:#5f5e5a;margin-top:4px">licences de pêche suspendues</div>
+    </div>
+    <div style="flex:1;min-width:130px;background:#faece7;border-radius:9px;padding:12px 14px;text-align:center">
+      <div id="c2" style="font-size:32px;font-weight:700;color:#D85A30;line-height:1">0</div>
+      <div style="font-size:12px;color:#5f5e5a;margin-top:4px">personnes touchées environ</div>
+    </div>
+  </div>
+  <div style="background:#f1efe8;border-radius:9px;padding:12px 14px;margin-bottom:10px">
+    <div style="font-size:12px;color:#5f5e5a;margin-bottom:8px;font-weight:500">Zones menacées de retrait</div>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+      <div style="flex:1;height:12px;background:#f1efe8;border:1px solid rgba(0,0,0,.1);border-radius:3px;overflow:hidden">
+        <div id="bar1" style="height:100%;background:#D85A30;width:0;border-radius:3px;transition:width 1.1s ease"></div>
+      </div>
+      <span style="font-size:12px;color:#5f5e5a;white-space:nowrap">234 licences (une zone entière)</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <div style="flex:1;height:12px;background:#f1efe8;border:1px solid rgba(0,0,0,.1);border-radius:3px;overflow:hidden">
+        <div id="bar2" style="height:100%;background:#378ADD;width:0;border-radius:3px;transition:width 1.3s ease"></div>
+      </div>
+      <span style="font-size:12px;color:#5f5e5a;white-space:nowrap">2 566 licences (reste du lac)</span>
+    </div>
+  </div>
+  <div style="display:flex;gap:10px">
+    <div style="flex:1;background:#f1efe8;border-radius:7px;padding:9px 11px">
+      <div style="font-size:16px;font-weight:700">750 LE</div>
+      <div style="font-size:10px;color:#5f5e5a;margin-top:1px">Frais actuels / tonne de poisson</div>
+    </div>
+    <div style="flex:1;background:#f1efe8;border-radius:7px;padding:9px 11px">
+      <div style="font-size:16px;font-weight:700">5 personnes</div>
+      <div style="font-size:10px;color:#5f5e5a;margin-top:1px">Moyenne de travailleurs / licence</div>
+    </div>
+    <div style="flex:1;background:#f1efe8;border-radius:7px;padding:9px 11px">
+      <div style="font-size:16px;font-weight:700">60+ ans</div>
+      <div style="font-size:10px;color:#5f5e5a;margin-top:1px">Droits hérités depuis 1962</div>
+    </div>
+  </div>
+  <script>
+  setTimeout(function(){
+    document.getElementById('bar1').style.width='8.36%';
+    document.getElementById('bar2').style.width='91.64%';
+    var s=null;
+    function cu(ts){if(!s)s=ts;var p=Math.min((ts-s)/900,1),e=1-Math.pow(1-p,3);document.getElementById('c1').textContent=Math.round(e*2800).toLocaleString('ar-EG');document.getElementById('c2').textContent=Math.round(e*14000).toLocaleString('ar-EG');if(p<1)requestAnimationFrame(cu);else{document.getElementById('c1').textContent='2,800';document.getElementById('c2').textContent='14,000+';}}
+    requestAnimationFrame(cu);
+  },200);
+  </script>
+  <p class="source">Source : Ahmed Silman, pêcheur expérimenté du lac Nasser, témoignage à Zawia3</p>
+</div>
+<script>
+setTimeout(function(){
+  var h=document.getElementById('root').offsetHeight;
+  window.parent.postMessage({type:'chartResize',height:h},'*');
+},1400);
+</script>
+<script>new ResizeObserver(function(){window.parent.postMessage({type:'chartResize',height:document.getElementById('root').offsetHeight},'*')}).observe(document.getElementById('root'));</script></body>
+</html>
